@@ -1,4 +1,4 @@
-There are the functions that I use frequently.
+There are the functions that I have used frequently.
 ---
 
 includes:
