@@ -1,3 +1,4 @@
+#coding=utf-8
 #websocket example
 import socket
 import threading
