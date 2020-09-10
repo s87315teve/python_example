@@ -88,7 +88,7 @@ class TCP_server():
                     time.sleep(1)
                     break
 class TCP_client():
-    def __init__(self, host="127.0.0.1", port=6000, code="utf-8", buffer_size=1024, timeout=3):
+    def __init__(self, host="127.0.0.1", port=6000, code="utf-8", buffer_size=1024):
         try:
             self.host=host
             self.port=port
@@ -96,7 +96,7 @@ class TCP_client():
             self.buffer_size=buffer_size
             self.timeout=timeout
             self.addr = (self.host, self.port)
-            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #建立socket
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #建立TCP socket
             self.sock.connect(self.addr) #self.addr
             print("connected to server")
         except Exception as e:
@@ -126,4 +126,102 @@ class TCP_client():
             print(errMsg)
 
 
-     
+class UDP_server():
+    def __init__(self, host="127.0.0.1", port=6000, code="utf-8", buffer_size=1024):
+        try:
+            self.host=host
+            self.port=port
+            self.code=code
+            self.buffer_size=buffer_size
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #建立UDP socket
+        except Exception as e:
+            error_class = e.__class__.__name__ #取得錯誤類型
+            detail = e.args[0] #取得詳細內容
+            cl, exc, tb = sys.exc_info() #取得Call Stack
+            lastCallStack = traceback.extract_tb(tb)[-1] #取得Call Stack的最後一筆資料
+            fileName = lastCallStack[0] #取得發生的檔案名稱
+            lineNum = lastCallStack[1] #取得發生的行號
+            funcName = lastCallStack[2] #取得發生的函數名稱
+            errMsg = "File \"{}\", line {}, in {}: [{}] {}".format(fileName, lineNum, funcName, error_class, detail)
+            print(errMsg)
+
+    def start(self):
+        try:
+
+            self.sock.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1) #讓socket可以reuse
+            bind_addr=(self.host, self.port)
+            self.sock.bind(bind_addr) #self.addr
+            print("server start")
+            print("server is listening to {}".format(bind_addr))
+        except Exception as e:
+            error_class = e.__class__.__name__ #取得錯誤類型
+            detail = e.args[0] #取得詳細內容
+            cl, exc, tb = sys.exc_info() #取得Call Stack
+            lastCallStack = traceback.extract_tb(tb)[-1] #取得Call Stack的最後一筆資料
+            fileName = lastCallStack[0] #取得發生的檔案名稱
+            lineNum = lastCallStack[1] #取得發生的行號
+            funcName = lastCallStack[2] #取得發生的函數名稱
+            errMsg = "File \"{}\", line {}, in {}: [{}] {}".format(fileName, lineNum, funcName, error_class, detail)
+            print(errMsg)
+            print("server failed to start")
+        while True:
+            while True:
+                try:
+                    msg, addr=self.sock.recvfrom(self.buffer_size)
+                    if not msg:
+                        print("no msg from {}",addr)
+                        break
+                    msg=msg.decode(self.code)
+                    print("recv from {} : {}".format(addr,msg))
+                except Exception as e:
+                    error_class = e.__class__.__name__ #取得錯誤類型
+                    detail = e.args[0] #取得詳細內容
+                    cl, exc, tb = sys.exc_info() #取得Call Stack
+                    lastCallStack = traceback.extract_tb(tb)[-1] #取得Call Stack的最後一筆資料
+                    fileName = lastCallStack[0] #取得發生的檔案名稱
+                    lineNum = lastCallStack[1] #取得發生的行號
+                    funcName = lastCallStack[2] #取得發生的函數名稱
+                    errMsg = "File \"{}\", line {}, in {}: [{}] {}".format(fileName, lineNum, funcName, error_class, detail)
+                    print(errMsg)
+                    print("sleep 1s and restart socket")
+                    time.sleep(1)
+                    break
+class UDP_client():
+    def __init__(self, host="127.0.0.1", port=6000, code="utf-8", buffer_size=1024):
+        try:
+            self.host=host
+            self.port=port
+            self.code=code
+            self.buffer_size=buffer_size
+            self.addr = (self.host, self.port)
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #建立UDP socket
+            #self.sock.connect(self.addr) #self.addr
+            print("connected to server")
+        except Exception as e:
+            error_class = e.__class__.__name__ #取得錯誤類型
+            detail = e.args[0] #取得詳細內容
+            cl, exc, tb = sys.exc_info() #取得Call Stack
+            lastCallStack = traceback.extract_tb(tb)[-1] #取得Call Stack的最後一筆資料
+            fileName = lastCallStack[0] #取得發生的檔案名稱
+            lineNum = lastCallStack[1] #取得發生的行號
+            funcName = lastCallStack[2] #取得發生的函數名稱
+            errMsg = "File \"{}\", line {}, in {}: [{}] {}".format(fileName, lineNum, funcName, error_class, detail)
+            print(errMsg)
+            print("connection failed ")
+    def send_msg(self, msg=""):
+        try:
+            msg=msg.encode(self.code)
+            self.sock.sendto(msg,self.addr)
+        except Exception as e:
+            error_class = e.__class__.__name__ #取得錯誤類型
+            detail = e.args[0] #取得詳細內容
+            cl, exc, tb = sys.exc_info() #取得Call Stack
+            lastCallStack = traceback.extract_tb(tb)[-1] #取得Call Stack的最後一筆資料
+            fileName = lastCallStack[0] #取得發生的檔案名稱
+            lineNum = lastCallStack[1] #取得發生的行號
+            funcName = lastCallStack[2] #取得發生的函數名稱
+            errMsg = "File \"{}\", line {}, in {}: [{}] {}".format(fileName, lineNum, funcName, error_class, detail)
+            print(errMsg)
+
+
+
