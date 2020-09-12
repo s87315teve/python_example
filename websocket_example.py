@@ -6,6 +6,7 @@ import time
 import os
 import sys
 import traceback
+import argparse
 
 class TCP_server():
     def __init__(self, host="127.0.0.1", port=6000, code="utf-8", buffer_size=1024, timeout=None):
@@ -222,6 +223,36 @@ class UDP_client():
             funcName = lastCallStack[2] #取得發生的函數名稱
             errMsg = "File \"{}\", line {}, in {}: [{}] {}".format(fileName, lineNum, funcName, error_class, detail)
             print(errMsg)
+def run(opt):
+    if opt.mode=="TCP_server":
+        server=TCP_server(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer, timeout=opt.timeout)
+        server.start()
+    elif opt.mode=="TCP_client":
+        client=TCP_client(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
+        client.start()
+    elif opt.mode=="UDP_server":
+        server=UDP_server(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
+        server.start()
+    elif opt.mode=="UDP_client":
+        client=UDP_client(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
+        client.start()
+    else:
+        print("argument illegal, please restart this program")
 
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", "-m", type=str, default=None, help="select mode")
+    parser.add_argument("--host", type=str,  default="127.0.0.1", help="set host IP")
+    parser.add_argument("--port", "-p", type=int, default=6000, help="set host port")
+    parser.add_argument("--code", "-c", type=str, default="utf-8", help="set how to encode/decode")
+    parser.add_argument("--buffer", "-b", type=int, default=1024, help="setbuffer size")
+    parser.add_argument("--timeout", "-t", type=int, default=None, help="set timeout")
+    opt = parser.parse_args()
+    print("your option:")
+    print(opt)
+    run(opt)
+    
 
 
