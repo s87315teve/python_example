@@ -95,7 +95,7 @@ class TCP_client():
             self.port=port
             self.code=code
             self.buffer_size=buffer_size
-            self.timeout=timeout
+            #self.timeout=timeout
             self.addr = (self.host, self.port)
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #建立TCP socket
             self.sock.connect(self.addr) #self.addr
