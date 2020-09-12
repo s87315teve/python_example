@@ -230,12 +230,20 @@ def run(opt):
     elif opt.mode=="TCP_client":
         client=TCP_client(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
         client.send_msg("connection success")
+        msg=input("input msg: ")
+        while msg!="exit":
+            client.send_msg(msg)
+            msg=input("input msg: ")
     elif opt.mode=="UDP_server":
         server=UDP_server(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
         server.start()
     elif opt.mode=="UDP_client":
         client=UDP_client(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
         client.send_msg("connection success")
+        msg=input("input msg: ")
+        while msg!="exit":
+            client.send_msg(msg)
+            msg=input("input msg: ")
     else:
         print("argument illegal, please restart this program")
 
