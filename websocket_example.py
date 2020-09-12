@@ -229,13 +229,13 @@ def run(opt):
         server.start()
     elif opt.mode=="TCP_client":
         client=TCP_client(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
-        client.start()
+        client.send_msg("connection success")
     elif opt.mode=="UDP_server":
         server=UDP_server(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
         server.start()
     elif opt.mode=="UDP_client":
         client=UDP_client(host=opt.host, port=opt.port, code=opt.code, buffer_size=opt.buffer)
-        client.start()
+        client.send_msg("connection success")
     else:
         print("argument illegal, please restart this program")
 
