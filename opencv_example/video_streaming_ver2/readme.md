@@ -10,7 +10,7 @@ ffmpeg -f v4l2 -i /dev/video0 -preset ultrafast -vcodec libx264 -tune zerolatenc
 ```
 -f v4l2 -i /dev/video0這段是讓我連接到webcam，但不知道樹莓派能不能用
 
-IP請去找自己設備的IP （我有點忘記是要放樹莓派的ip還是筆電的ip了）
+IP請去找自己設備的IP （我有點忘記是要放樹莓派的ip還是筆電的ip了，你們可能要去試試看）
 PORT自訂一個不會衝突到的就好（例如:5000)
 
 
