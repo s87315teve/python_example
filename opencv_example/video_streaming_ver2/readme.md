@@ -1,5 +1,5 @@
 # 使用教學
-===
+
 在樹莓派的terminal中輸入
 ```
 sudo apt-get install ffmpeg
@@ -13,7 +13,7 @@ ffmpeg -f v4l2 -i /dev/video0 -preset ultrafast -vcodec libx264 -tune zerolatenc
 IP請去找自己設備的IP （我有點忘記是要放樹莓派的ip還是筆電的ip了）
 PORT自訂一個不會衝突到的就好（例如:5000)
 
-===
+
 樹莓派都設定好之後，在筆電執行以下指令安裝python的opencv環境
 ```
 pip intall opencv_python
