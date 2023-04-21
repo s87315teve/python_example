@@ -16,7 +16,7 @@ PORT自訂一個不會衝突到的就好（例如:5000)
 
 樹莓派都設定好之後，在筆電執行以下指令安裝python的opencv環境
 ```
-pip intall opencv_python
+pip intall opencvpython
 ```
 之後再執行opencv_test.py就可以串流影像了(要注意IP和PORT)
 ```
