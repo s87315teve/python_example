@@ -17,3 +17,5 @@ python cam_client.py
 * server端會自動錄影
 * 按下"q"可以關掉
 * 按下"c"可以截圖存下來
+
+如果會遇到bug可以把cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)改成cam = cv2.VideoCapture(0
