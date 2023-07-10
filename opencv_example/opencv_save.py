@@ -26,6 +26,7 @@ while True:
             now=datetime.now()
             f.write("{}\n".format(str(now)))
             out.write(frame)
+        cv2.namedWindow("webcam", cv2.WINDOW_NORMAL)
         cv2.imshow("webcam",frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
