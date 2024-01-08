@@ -28,4 +28,4 @@ target_folder_path = "/path/to/your/target/folder"
 delete_file_type=".pth"
 
 # 呼叫函式刪除指定資料夾及其子資料夾中的所有指定附檔名的檔案
-delete_pth_files(target_folder_path, delete_file_type)
+delete_files(target_folder_path, delete_file_type)
